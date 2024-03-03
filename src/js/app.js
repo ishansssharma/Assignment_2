@@ -4,9 +4,13 @@ const productNameInput = document.querySelector(".product-name");
 const productIDInput = document.querySelector(".product-ID");
 const manufacturerInput = document.querySelector(".manufacturer");
 const expirationDateInput = document.querySelector(".expiration-date");
-const quantityInput = document.querySelector(".quantity-input");
+const quantityInput = document.querySelector(".quantity");
 const tabletInput = document.querySelector(".tablet");
 const syrupInput = document.querySelector(".syrup");
+const renderList = document.querySelector(".medicinelist");
+const addMedButton = document.querySelector(".addmed-button");
+
+const allMedicineArray = [];
 
 
 // CLASS WITH MEDICINE
@@ -21,11 +25,32 @@ class Medicine {
 	// METHOD FOR CREATING DIFFERENT MEDICINES
 
 	static createMedicine() {
-		const newMedicine = new Medicine(productNameInput.value, productIDInput.value, manufacturerInput.value, expirationDateInput.value, quantityInput.value)
-		return newMedicine;
+
+		addMedButton.addEventListener('click', (event) => {
+			event.preventDefault();
+			const newMedicine = {
+				productname: productNameInput.value,
+				manufacturer: manufacturerInput.value,
+				expirationdate: expirationDateInput.value,
+				quantity: quantityInput.value,
+				productID: Date.now()
+			}
+
+			allMedicineArray.push(newMedicine);
+
+			localStorage.setItem('medicine', JSON.stringify(allMedicineArray));
+
+
+			const addedInfo = JSON.parse(localStorage.getItem('medicine'));
+			console.log(addedInfo);
+
+		})
+
 	}
 
 }
+
+Medicine.createMedicine();
 
 class UI {
 	static createList() {

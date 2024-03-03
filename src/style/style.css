@@ -6,26 +6,33 @@
 }
 
 .medicine-form {
+	width: 30rem;
+	height: 30rem;
+	border-radius: 2rem;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	gap: 0.2rem;
+	margin: 0 auto;
+	background-color: #fdc4b3;
+
+
+
 
 }
 
 .medicine-form input {
 	width: 10rem;
-	height: 1.2rem;
+	height: 1.5rem;
 	padding: 0 0.25rem;
-	border-radius: 0.3rem;
+	border-radius: 0.2rem;
 }
 
 .addmed-button {
 	border: none;
+	border-radius: 0.2rem;
 	width: 5rem;
 	height: 2rem;
-
-
 
 }
