@@ -9,6 +9,7 @@ const tabletInput = document.querySelector(".tablet");
 const syrupInput = document.querySelector(".syrup");
 const renderList = document.querySelector(".medicinelist");
 const addMedButton = document.querySelector(".addmed-button");
+const deleteAllMedButton = document.querySelector(".deleteallmed-button");
 
 const allMedicineArray = [];
 
@@ -44,16 +45,46 @@ class Medicine {
 			const addedInfo = JSON.parse(localStorage.getItem('medicine'));
 			console.log(addedInfo);
 
+			UI.createList();
 		})
 
+	}
+
+	static deleteAllMed() {
+		deleteAllMedButton.addEventListener('click', () => {
+			localStorage.removeItem('medicine', allMedicineArray);
+		})
 	}
 
 }
 
 Medicine.createMedicine();
+Medicine.deleteAllMed();
 
 class UI {
 	static createList() {
 
+		renderList.textContent = '';
+		allMedicineArray.forEach((medicine) => {
+			const medicineLi = document.createElement('li');
+			const productnamespan = document.createElement('span');
+			const productIDspan = document.createElement("span");
+			const manufacturerspan = document.createElement("span");
+			const expirationdatespan = document.createElement("span");
+			const quantityspan = document.createElement("span");
+
+			// ASSIGNING THE VALUES
+
+			renderList.append(medicineLi);
+			medicineLi.append(productnamespan, productIDspan, manufacturerspan, expirationdatespan, quantityspan);
+
+			// GIVING VALUES TO THE ELEMENTS
+
+			productnamespan.textContent = medicine.productname;
+			productIDspan.textContent = medicine.productID;
+			manufacturerspan.textContent = medicine.manufacturer;
+			expirationdatespan.textContent = medicine.expirationdate;
+			quantityspan.textContent = medicine.quantity;
+		})
 	}
 }

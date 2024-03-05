@@ -1,8 +1,17 @@
-.header-form {
+.header {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	font-size: 3rem;
+}
+
+.header-underline {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0 auto;
+
+
 }
 
 .medicine-form {
@@ -29,10 +38,18 @@
 	border-radius: 0.2rem;
 }
 
-.addmed-button {
+.addmed-button,
+.deleteallmed-button {
 	border: none;
 	border-radius: 0.2rem;
 	width: 5rem;
+	height: 2rem;
+	cursor: pointer;
+
+}
+
+.deleteallmed-button {
+	width: 15rem;
 	height: 2rem;
 
 }
