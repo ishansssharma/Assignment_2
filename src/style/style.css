@@ -53,3 +53,19 @@
 	height: 2rem;
 
 }
+
+.medicineline {
+	border: solid black 0.1rem;
+	width: 50rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.productspan,
+.productIDspan,
+.manufacturerspan,
+.expirationdatespan,
+.quantityspan {
+	flex-basis: 20%;
+}

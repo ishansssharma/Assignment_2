@@ -56,27 +56,44 @@ class Medicine {
 		})
 	}
 
+	static deleteSingleMed() {
+		singleMedicineDeleteButton.addEventListener('click', () => {
+			const MedArray = JSON.parse(localStorage.getItem('medicine')) || []
+
+			const updatedMedArray = MedArray.filter(med => med.id !== medID);
+
+			localStorage.setItem('medicine', JSON.stringify(updatedMedArray));
+		})
+	}
+
 }
+
 
 Medicine.createMedicine();
 Medicine.deleteAllMed();
+Medicine.deleteSingleMed();
 
 class UI {
 	static createList() {
 
 		renderList.textContent = '';
 		allMedicineArray.forEach((medicine) => {
+
+			//CREATING ELEMENTS
 			const medicineLi = document.createElement('li');
 			const productnamespan = document.createElement('span');
 			const productIDspan = document.createElement("span");
 			const manufacturerspan = document.createElement("span");
 			const expirationdatespan = document.createElement("span");
 			const quantityspan = document.createElement("span");
+			const singleMedicineDeleteButton = document.createElement("button");
 
 			// ASSIGNING THE VALUES
 
 			renderList.append(medicineLi);
-			medicineLi.append(productnamespan, productIDspan, manufacturerspan, expirationdatespan, quantityspan);
+			medicineLi.append(productnamespan, productIDspan, manufacturerspan, expirationdatespan, quantityspan, singleMedicineDeleteButton);
+
+
 
 			// GIVING VALUES TO THE ELEMENTS
 
@@ -85,6 +102,17 @@ class UI {
 			manufacturerspan.textContent = medicine.manufacturer;
 			expirationdatespan.textContent = medicine.expirationdate;
 			quantityspan.textContent = medicine.quantity;
+			singleMedicineDeleteButton.textContent = "Delete";
+
+			//GIVING CLASSES TO THE ELEMENTS
+			medicineLi.classList.add("medicineline");
+			productnamespan.classList.add("productspan");
+			productIDspan.classList.add("productIDspan");
+			manufacturerspan.classList.add("manufacturerspan");
+			expirationdatespan.classList.add("expirationdatespan");
+			quantityspan.classList.add("quantityspan");
+
 		})
 	}
+
 }
