@@ -11,7 +11,8 @@ const renderList = document.querySelector(".medicinelist");
 const addMedButton = document.querySelector(".addmed-button");
 const deleteAllMedButton = document.querySelector(".deleteallmed-button");
 
-const allMedicineArray = [];
+
+let allMedicineArray = [];
 
 
 // CLASS WITH MEDICINE
@@ -56,22 +57,14 @@ class Medicine {
 		})
 	}
 
-	static deleteSingleMed() {
-		singleMedicineDeleteButton.addEventListener('click', () => {
-			const MedArray = JSON.parse(localStorage.getItem('medicine')) || []
 
-			const updatedMedArray = MedArray.filter(med => med.id !== medID);
-
-			localStorage.setItem('medicine', JSON.stringify(updatedMedArray));
-		})
-	}
 
 }
 
 
 Medicine.createMedicine();
 Medicine.deleteAllMed();
-Medicine.deleteSingleMed();
+
 
 class UI {
 	static createList() {
@@ -102,7 +95,8 @@ class UI {
 			manufacturerspan.textContent = medicine.manufacturer;
 			expirationdatespan.textContent = medicine.expirationdate;
 			quantityspan.textContent = medicine.quantity;
-			singleMedicineDeleteButton.textContent = "Delete";
+			singleMedicineDeleteButton.textContent = "Delete"
+
 
 			//GIVING CLASSES TO THE ELEMENTS
 			medicineLi.classList.add("medicineline");
@@ -112,7 +106,29 @@ class UI {
 			expirationdatespan.classList.add("expirationdatespan");
 			quantityspan.classList.add("quantityspan");
 
+			singleMedicineDeleteButton.addEventListener('click', () => {
+				//const MedArray = JSON.parse(localStorage.getItem('medicine')) || []
+
+				const updatedMedArray = allMedicineArray.filter(med => med.productID !== medicine.productID);
+
+				localStorage.setItem('medicine', JSON.stringify(updatedMedArray));
+
+				allMedicineArray = updatedMedArray;
+
+
+				UI.createList();
+
+			})
+
+
+
+
+
+
+
 		})
 	}
-
 }
+
+
+

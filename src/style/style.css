@@ -56,10 +56,12 @@
 
 .medicineline {
 	border: solid black 0.1rem;
+	border-radius: 0.1rem;
 	width: 50rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	margin: 0 auto;
 }
 
 .productspan,
@@ -68,4 +70,8 @@
 .expirationdatespan,
 .quantityspan {
 	flex-basis: 20%;
+}
+
+.medicinelist {
+	gap: 1rem;
 }
