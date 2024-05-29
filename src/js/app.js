@@ -30,23 +30,31 @@ class Medicine {
 
 		addMedButton.addEventListener('click', (event) => {
 			event.preventDefault();
-			const newMedicine = {
-				productname: productNameInput.value,
-				manufacturer: manufacturerInput.value,
-				expirationdate: expirationDateInput.value,
-				quantity: quantityInput.value,
-				productID: Date.now()
+			if (Medicine.validateInputs()) {
+				const newMedicine = {
+					productname: productNameInput.value,
+					manufacturer: manufacturerInput.value,
+					expirationdate: expirationDateInput.value,
+					quantity: quantityInput.value,
+					productID: Date.now()
+				}
+
+				allMedicineArray.push(newMedicine);
+
+				localStorage.setItem('medicine', JSON.stringify(allMedicineArray));
+
+
+				const addedInfo = JSON.parse(localStorage.getItem('medicine'));
+
+				UI.createList();
+			} else {
+				const alertMessage = document.createElement("div")
+				renderList.appendChild(alertMessage)
+				alertMessage.textContent = "Please fill inn all the fields before adding a new medicine!"
+				alertMessage.classList.add("alertmessage");
+
 			}
 
-			allMedicineArray.push(newMedicine);
-
-			localStorage.setItem('medicine', JSON.stringify(allMedicineArray));
-
-
-			const addedInfo = JSON.parse(localStorage.getItem('medicine'));
-			console.log(addedInfo);
-
-			UI.createList();
 		})
 
 	}
@@ -57,9 +65,19 @@ class Medicine {
 		})
 	}
 
-
+	static validateInputs() {
+		return productNameInput.value.trim() !== '' &&
+			manufacturerInput.value.trim() !== '' &&
+			expirationDateInput.value.trim() !== '' &&
+			quantityInput.value.trim() !== '';
+	}
 
 }
+
+
+
+
+
 
 
 Medicine.createMedicine();
@@ -105,6 +123,7 @@ class UI {
 			manufacturerspan.classList.add("manufacturerspan");
 			expirationdatespan.classList.add("expirationdatespan");
 			quantityspan.classList.add("quantityspan");
+			singleMedicineDeleteButton.classList.add("deletesinglemed")
 
 			singleMedicineDeleteButton.addEventListener('click', () => {
 				//const MedArray = JSON.parse(localStorage.getItem('medicine')) || []
@@ -129,6 +148,4 @@ class UI {
 		})
 	}
 }
-
-
 
